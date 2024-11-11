@@ -16,11 +16,13 @@ class Board {
     mArea[1].draw();
     iArea.draw();
   }
-  int getBlankYIndex() {
-    for (int i=this.posY; i<this.posY+this.tate; i++) {
-      AbstractKoma koma = komaList.getKomaFromPlace(this.posX, i);
-      if (koma==null) return i;
+  void select(int x, int y){
+    AbstractKoma koma = komaList.getSelectedKoma();
+    if(koma==null){
+      komaList.select(x,y);
+    }else{
+      koma.move(x,y);
+      koma.kStat.selected=false;
     }
-    return -1;//空きが無い場合
   }
 }
